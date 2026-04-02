@@ -131,21 +131,6 @@
                                 Masuk
                             </button>
                         </div>
-
-                        <div class="text-center small-link">
-                            Belum punya akun?
-                            <a href="#" class="text-decoration-none">
-                                Daftar sekarang
-                            </a>
-                        </div>
-
-                        <div class="text-center mt-3 small-link">
-                            Login sebagai
-                            <a href="{{ route('admin.login') }}" class="text-decoration-none">
-                                Admin
-                            </a>
-                        </div>
-
                     </form>
 
                 </div>

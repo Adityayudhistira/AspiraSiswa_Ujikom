@@ -6,148 +6,99 @@
     <title>Login Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        .container-fluid {
-            height: 100vh;
-        }
-
-        /* LEFT PANEL (ADMIN STYLE) */
-        .left-panel {
-            background: #2f5fd0;
-            color: white;
-            padding: 80px 60px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .left-panel h2 {
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .left-panel p {
-            opacity: 0.85;
-        }
-
-        /* RIGHT PANEL */
-        .right-panel {
-            background: #f8fafc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .login-box {
-            width: 360px;
-        }
-
-        .login-box h4 {
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .form-control {
-            height: 45px;
-        }
-
-        .btn-login {
-            background: #1e293b;
-            border: none;
-            height: 45px;
-            font-weight: 500;
-        }
-
-        .btn-login:hover {
-            background: #0f172a;
-        }
-
-        .small-link {
-            font-size: 14px;
-        }
-    </style>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
+<body class="min-h-screen font-sans">
+    <div class="grid md:grid-cols-2 min-h-screen">
 
-    <div class="container-fluid">
-        <div class="row h-100">
+        <!-- LEFT PANEL -->
+        <div class="hidden md:flex flex-col justify-center px-16 bg-blue-600 text-white">
+            <h2 class="text-4xl font-bold mb-4">
+                Admin Dashboard Akses
+            </h2>
 
-            <!-- LEFT SIDE -->
-            <div class="col-md-6 left-panel">
-                <h2>Admin Dashboard Akses</h2>
+            <p class="text-lg opacity-90 leading-relaxed">
+                Masuk sebagai administrator untuk mengelola
+                data aspirasi, kategori, dan laporan sistem.
+            </p>
+
+            <div class="mt-10 text-sm opacity-80">
                 <p>
-                    Masuk sebagai administrator untuk mengelola
-                    data aspirasi, kategori, dan laporan sistem.
+                    "Kelola sistem dengan bijak dan transparan
+                    untuk pelayanan terbaik."
+                </p>
+                <p class="mt-2 font-semibold">- Admin</p>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL -->
+        <div class="flex items-center justify-center bg-slate-100 px-6">
+
+            <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
+
+                <h4 class="text-2xl font-semibold text-gray-800 mb-2">
+                    Masuk ke Dashboard Admin
+                </h4>
+
+                <p class="text-gray-500 mb-6 text-sm">
+                    Silakan masukkan username dan password
                 </p>
 
-                <div class="mt-5">
-                    <small>
-                        "Kelola sistem dengan bijak dan transparan
-                        untuk pelayanan terbaik."
-                    </small>
-                    <br>
-                    <strong>- Admin</strong>
-                </div>
-            </div>
+                @if ($errors->any())
+                    <div class="mb-4 bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-lg">
+                        {{ $errors->first() }}
+                    </div>
+                @endif
 
-            <!-- RIGHT SIDE -->
-            <div class="col-md-6 right-panel">
-                <div class="login-box">
+                <form action="{{ route('admin.loginProses') }}" method="POST" class="space-y-4">
+                    @csrf
 
-                    <h4>Masuk ke Dashboard Admin</h4>
-                    <p class="text-muted mb-4">
-                        Silakan masukkan username dan password
+                    <!-- Username -->
+                    <div>
+                        <label class="text-sm font-medium text-gray-600">Username</label>
+                        <input type="text" name="username"
+                            class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                            placeholder="Masukkan Username" required autofocus>
+                    </div>
+
+                    <!-- Password -->
+                    <div>
+                        <label class="text-sm font-medium text-gray-600">Password</label>
+                        <input type="password" name="password"
+                            class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                            placeholder="Masukkan Password" required>
+                    </div>
+
+                    <!-- Button -->
+                    <button type="submit"
+                        class="w-full bg-slate-900 hover:bg-slate-800 text-white py-2 rounded-lg font-medium transition">
+                        Masuk ke Dashboard
+                    </button>
+
+                    <!-- Register -->
+                    <p class="text-center text-sm text-gray-600">
+                        Belum punya akun?
+                        <a href="{{ route('admin.register') }}" class="text-blue-500 hover:underline">
+                            Daftar sekarang
+                        </a>
                     </p>
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            {{ $errors->first() }}
-                        </div>
-                    @endif
+                    <!-- Login siswa -->
+                    <p class="text-center text-sm text-gray-500">
+                        Login sebagai
+                        <a href="{{ route('login') }}" class="text-blue-500 hover:underline">
+                            Siswa
+                        </a>
+                    </p>
 
-                    <form action="{{ route('admin.loginProses') }}" method="POST">
-                        @csrf
+                </form>
 
-                        <div class="mb-3">
-                            <label class="form-label small">Username</label>
-                            <input type="text" name="username" class="form-control" placeholder="Masukkan Username"
-                                required autofocus>
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="form-label small">Password</label>
-                            <input type="password" name="password" class="form-control" placeholder="Masukkan Password"
-                                required>
-                        </div>
-
-                        <div class="d-grid mb-3">
-                            <button type="submit" class="btn btn-login text-white">
-                                Masuk ke Dashboard
-                            </button>
-                        </div>
-
-                        <div class="text-center small-link">
-                            Login sebagai
-                            <a href="{{ route('login') }}" class="text-decoration-none">
-                                Siswa
-                            </a>
-                        </div>
-
-                    </form>
-
-                </div>
             </div>
 
         </div>
+
     </div>
 
 </body>

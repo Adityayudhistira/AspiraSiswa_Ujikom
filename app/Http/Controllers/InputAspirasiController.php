@@ -40,13 +40,19 @@ class InputAspirasiController extends Controller
                 $data->where('id_category', $request->id_category);
             }
 
+            if ($request->filled('status')) {
+                $data->whereHas('aspirasi', function ($q) use ($request) {
+                    $q->where('status', $request->status);
+                });
+            }
+
             $query = $data->get();
 
             $stats = [
                 'total' => $query->count(),
-                'menunggu' => $query->where('aspirasi.status', 'Menunggu')->count(),
-                'proses' => $query->where('aspirasi.status', 'Proses')->count(),
-                'selesai' => $query->where('aspirasi.status', 'Selesai')->count(),
+                'menunggu' => $query->filter(fn($item) => optional($item->aspirasi)->status == 'Menunggu')->count(),
+                'proses' => $query->filter(fn($item) => optional($item->aspirasi)->status == 'Proses')->count(),
+                'selesai' => $query->filter(fn($item) => optional($item->aspirasi)->status == 'Selesai')->count(),
             ];
 
             $categories = \App\Models\Category::all();

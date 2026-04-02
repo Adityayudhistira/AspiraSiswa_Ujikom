@@ -1,237 +1,210 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('admin.layout.sidebar')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kelola Aspirasi</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-</head>
+@section('content')
+    <div class="p-6">
 
-<body>
+        <!-- TITLE -->
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+            📊 Kelola Semua Aspirasi
+        </h2>
 
-    @extends('admin.layout.sidebar')
+        <!-- SUCCESS ALERT -->
+        @if (session('success'))
+            <div class="mb-4 bg-green-100 border border-green-300 text-green-700 px-4 py-3 rounded-lg">
+                {{ session('success') }}
+            </div>
+        @endif
 
-    @section('content')
-        <div class="container mt-4">
-            <h2 class="mb-4">📊 Kelola Semua Aspirasi</h2>
-
-            @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            @endif
-
-            <!-- STATISTIK CARD -->
-            <div class="row mb-4">
-                <div class="col-md-3">
-                    <div class="card text-white bg-primary">
-                        <div class="card-body">
-                            <h5 class="card-title">📈 Total Aspirasi</h5>
-                            <h2 class="mb-0">{{ $stats['total'] }}</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card text-white bg-warning">
-                        <div class="card-body">
-                            <h5 class="card-title">⏳ Menunggu</h5>
-                            <h2 class="mb-0">{{ $stats['menunggu'] }}</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card text-white bg-info">
-                        <div class="card-body">
-                            <h5 class="card-title">⚙️ Proses</h5>
-                            <h2 class="mb-0">{{ $stats['proses'] }}</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card text-white bg-success">
-                        <div class="card-body">
-                            <h5 class="card-title">✅ Selesai</h5>
-                            <h2 class="mb-0">{{ $stats['selesai'] }}</h2>
-                        </div>
-                    </div>
-                </div>
+        <!-- STATISTIK -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-blue-500 text-white p-5 rounded-2xl shadow">
+                <p class="text-sm">📈 Total Aspirasi</p>
+                <h2 class="text-2xl font-bold">{{ $stats['total'] }}</h2>
             </div>
 
-            <!-- FILTER CARD -->
-            <div class="card mb-4">
-                <div class="card-header bg-blue-500 text-white">
-                    <h5 class="mb-0">🔍 Filter Aspirasi</h5>
-                </div>
-                <div class="card-body">
-                    <form method="GET" action="{{ route('admin.aspirasi.index') }}">
-                        <div class="row g-3">
-
-                            <!-- Filter Rentang Tanggal -->
-                            <div class="col-md-4">
-                                <label class="form-label fw-bold">📅 Dari Tanggal</label>
-                                <input type="date" class="form-control" name="tanggal_awal"
-                                    value="{{ request('tanggal_awal') }}">
-                            </div>
-
-                            <div class="col-md-4">
-                                <label class="form-label fw-bold">📅 Sampai Tanggal</label>
-                                <input type="date" class="form-control" name="tanggal_akhir"
-                                    value="{{ request('tanggal_akhir') }}">
-                            </div>
-                            <!-- Filter Siswa -->
-                            <div class="col-md-3">
-                                <label class="form-label fw-bold">👤 Siswa</label>
-                                <select class="form-select" name="nis">
-                                    <option value="">Semua Siswa</option>
-                                    @foreach ($siswas as $siswa)
-                                        <option value="{{ $siswa->nis }}"
-                                            {{ request('nis') == $siswa->nis ? 'selected' : '' }}>
-                                            {{ $siswa->nama }} ({{ $siswa->nis }})
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <!-- Filter Kategori -->
-                            <div class="col-md-2">
-                                <label class="form-label fw-bold">📂 Kategori</label>
-                                <select class="form-select" name="id_category">
-                                    <option value="">Semua Kategori</option>
-                                    @foreach ($categories as $cat)
-                                        <option value="{{ $cat->id_category }}"
-                                            {{ request('id_category') == $cat->id_category ? 'selected' : '' }}>
-                                            {{ $cat->ket_category }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <!-- Filter Status -->
-                            <div class="col-md-2">
-                                <label class="form-label fw-bold">📊 Status</label>
-                                <select class="form-select" name="status">
-                                    <option value="">Semua Status</option>
-                                    <option value="Menunggu" {{ request('status') == 'Menunggu' ? 'selected' : '' }}>
-                                        Menunggu</option>
-                                    <option value="Proses" {{ request('status') == 'Proses' ? 'selected' : '' }}>Proses
-                                    </option>
-                                    <option value="Selesai" {{ request('status') == 'Selesai' ? 'selected' : '' }}>Selesai
-                                    </option>
-                                </select>
-                            </div>
-
-                            <!-- Tombol Aksi -->
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="bi bi-search"></i> Filter
-                                </button>
-                                <a href="{{ route('admin.aspirasi.index') }}" class="btn btn-secondary">
-                                    <i class="bi bi-arrow-clockwise"></i> Reset
-                                </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+            <div class="bg-yellow-400 text-gray-800 p-5 rounded-2xl shadow">
+                <p class="text-sm">⏳ Menunggu</p>
+                <h2 class="text-2xl font-bold">{{ $stats['menunggu'] }}</h2>
             </div>
 
-            <!-- TABEL ASPIRASI -->
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-hover">
-                            <thead class="table-danger">
-                                <tr>
-                                    <th>No</th>
-                                    <th>Tanggal</th>
-                                    <th>NIS</th>
-                                    <th>Nama Siswa</th>
-                                    <th>Kelas</th>
-                                    <th>Kategori</th>
-                                    <th>Lokasi</th>
-                                    <th>Keterangan</th>
-                                    <th>Status</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($query as $index => $item)
-                                    <tr>
-                                        <td>{{ $index + 1 }}</td>
-                                        <td>{{ $item->created_at->format('d/m/Y') }}</td>
-                                        <td>{{ $item->nis }}</td>
-                                        <td>{{ $item->siswa->nama }}</td>
-                                        <td>{{ $item->siswa->kelas }}</td>
-                                        <td><span class="badge bg-secondary">{{ $item->category->ket_category }}</span>
-                                        </td>
-                                        <td>{{ Str::limit($item->lokasi, 15) }}</td>
-                                        <td>{{ Str::limit($item->ket, 30) }}</td>
-                                        <td>
-                                            @if ($item->aspirasi)
-                                                @php
-                                                    $status = $item->aspirasi->status;
-                                                    $badge = match ($status) {
-                                                        'Menunggu' => 'warning',
-                                                        'Proses' => 'info',
-                                                        'Selesai' => 'success',
-                                                        default => 'secondary',
-                                                    };
-                                                @endphp
-                                                <span class="badge bg-{{ $badge }}">{{ $status }}</span>
-                                            @else
-                                                <span class="badge bg-secondary">Belum Diproses</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <div class="d-flex gap-2">
+            <div class="bg-sky-500 text-white p-5 rounded-2xl shadow">
+                <p class="text-sm">⚙️ Proses</p>
+                <h2 class="text-2xl font-bold">{{ $stats['proses'] }}</h2>
+            </div>
 
-                                                <!-- Tombol Edit -->
-                                                <a href="{{ route('admin.aspirasi.editStatus', $item->id_pelaporan) }}"
-                                                    class="btn btn-sm btn-warning">
-                                                    <i class="bi bi-pencil"></i>
-                                                </a>
-
-                                                <!-- Tombol Delete -->
-                                                <form action="{{ route('admin.aspirasi.destroy', $item->id_pelaporan) }}"
-                                                    method="POST"
-                                                    onsubmit="return confirm('Yakin ingin menghapus aspirasi ini?')">
-
-                                                    @csrf
-                                                    @method('DELETE')
-
-                                                    <button type="submit" class="btn btn-sm btn-danger">
-                                                        <i class="bi bi-trash"></i>
-                                                    </button>
-                                                </form>
-
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="9" class="text-center">
-                                            <em>Tidak ada data aspirasi
-                                                {{ request()->anyFilled(['tanggal', 'bulan', 'nis', 'id_category', 'status']) ? 'dengan filter tersebut' : '' }}</em>
-                                        </td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-
-                    @if ($query->count() > 0)
-                        <div class="alert alert-info mt-3 mb-0">
-                            <strong>📊 Total hasil filter:</strong> {{ $query->count() }} aspirasi
-                        </div>
-                    @endif
-                </div>
+            <div class="bg-green-500 text-white p-5 rounded-2xl shadow">
+                <p class="text-sm">✅ Selesai</p>
+                <h2 class="text-2xl font-bold">{{ $stats['selesai'] }}</h2>
             </div>
         </div>
-    @endsection
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+        <!-- FILTER -->
+        <div class="bg-white shadow rounded-2xl mb-6">
+            <div class="bg-blue-500 text-white px-6 py-3 rounded-t-2xl font-semibold">
+                🔍 Filter Aspirasi
+            </div>
 
-</html>
+            <form method="GET" action="{{ route('admin.aspirasi.index') }}" class="p-6 grid md:grid-cols-3 gap-4">
+
+                <div>
+                    <label class="text-sm font-medium">📅 Dari Tanggal</label>
+                    <input type="date" name="tanggal_awal" value="{{ request('tanggal_awal') }}"
+                        class="w-full border rounded-lg px-3 py-2 mt-1 focus:ring-2 focus:ring-blue-400">
+                </div>
+
+                <div>
+                    <label class="text-sm font-medium">📅 Sampai Tanggal</label>
+                    <input type="date" name="tanggal_akhir" value="{{ request('tanggal_akhir') }}"
+                        class="w-full border rounded-lg px-3 py-2 mt-1 focus:ring-2 focus:ring-blue-400">
+                </div>
+
+                <div>
+                    <label class="text-sm font-medium">👤 Siswa</label>
+                    <select name="nis" class="w-full border rounded-lg px-3 py-2 mt-1 focus:ring-2 focus:ring-blue-400">
+                        <option value="">Semua Siswa</option>
+                        @foreach ($siswas as $siswa)
+                            <option value="{{ $siswa->nis }}" {{ request('nis') == $siswa->nis ? 'selected' : '' }}>
+                                {{ $siswa->nama }} ({{ $siswa->nis }})
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div>
+                    <label class="text-sm font-medium">📂 Kategori</label>
+                    <select name="id_category"
+                        class="w-full border rounded-lg px-3 py-2 mt-1 focus:ring-2 focus:ring-blue-400">
+                        <option value="">Semua Kategori</option>
+                        @foreach ($categories as $cat)
+                            <option value="{{ $cat->id_category }}"
+                                {{ request('id_category') == $cat->id_category ? 'selected' : '' }}>
+                                {{ $cat->ket_category }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div>
+                    <label class="text-sm font-medium">📊 Status</label>
+                    <select name="status" class="w-full border rounded-lg px-3 py-2 mt-1 focus:ring-2 focus:ring-blue-400">
+                        <option value="">Semua Status</option>
+                        <option value="Menunggu" {{ request('status') == 'Menunggu' ? 'selected' : '' }}>Menunggu</option>
+                        <option value="Proses" {{ request('status') == 'Proses' ? 'selected' : '' }}>Proses</option>
+                        <option value="Selesai" {{ request('status') == 'Selesai' ? 'selected' : '' }}>Selesai</option>
+                    </select>
+                </div>
+
+                <div class="flex items-end gap-2">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
+                        🔍 Filter
+                    </button>
+
+                    <a href="{{ route('admin.aspirasi.index') }}"
+                        class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg">
+                        Reset
+                    </a>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- TABLE -->
+        <div class="bg-white shadow rounded-2xl overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left">
+
+                    <thead class="bg-blue-500 text-white">
+                        <tr>
+                            <th class="px-4 py-3">No</th>
+                            <th class="px-4 py-3">Tanggal</th>
+                            <th class="px-4 py-3">NIS</th>
+                            <th class="px-4 py-3">Nama</th>
+                            <th class="px-4 py-3">Kelas</th>
+                            <th class="px-4 py-3">Kategori</th>
+                            <th class="px-4 py-3">Lokasi</th>
+                            <th class="px-4 py-3">Keterangan</th>
+                            <th class="px-4 py-3">Status</th>
+                            <th class="px-4 py-3">Aksi</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="divide-y">
+                        @forelse ($query as $index => $item)
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-4 py-3">{{ $index + 1 }}</td>
+                                <td class="px-4 py-3">{{ $item->created_at->format('d/m/Y') }}</td>
+                                <td class="px-4 py-3">{{ $item->nis }}</td>
+                                <td class="px-4 py-3">{{ $item->siswa->nama }}</td>
+                                <td class="px-4 py-3">{{ $item->siswa->kelas }}</td>
+
+                                <td class="px-4 py-3">
+                                    <span class="bg-gray-200 px-2 py-1 rounded text-xs">
+                                        {{ $item->category->ket_category }}
+                                    </span>
+                                </td>
+
+                                <td class="px-4 py-3">{{ Str::limit($item->lokasi, 15) }}</td>
+                                <td class="px-4 py-3">{{ Str::limit($item->ket, 30) }}</td>
+
+                                <td class="px-4 py-3">
+                                    @if ($item->aspirasi)
+                                        @php
+                                            $status = $item->aspirasi->status;
+                                            $color = match ($status) {
+                                                'Menunggu' => 'bg-yellow-400',
+                                                'Proses' => 'bg-sky-500 text-white',
+                                                'Selesai' => 'bg-green-500 text-white',
+                                                default => 'bg-gray-400',
+                                            };
+                                        @endphp
+                                        <span class="{{ $color }} px-2 py-1 rounded text-xs">
+                                            {{ $status }}
+                                        </span>
+                                    @else
+                                        <span class="bg-gray-300 px-2 py-1 rounded text-xs">
+                                            Belum Diproses
+                                        </span>
+                                    @endif
+                                </td>
+
+                                <td class="px-4 py-3">
+                                    <div class="flex items-center gap-2 h-full">
+                                        <a href="{{ route('admin.aspirasi.editStatus', $item->id_pelaporan) }}"
+                                            class="bg-yellow-400 hover:bg-yellow-500 px-3 py-2 rounded text-sm flex items-center justify-center">
+                                            ✏️
+                                        </a>
+
+                                        <form action="{{ route('admin.aspirasi.destroy', $item->id_pelaporan) }}"
+                                            method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button
+                                                class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded text-sm flex items-center justify-center">
+                                                🗑️
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="10" class="text-center py-6 text-gray-500">
+                                    Tidak ada data aspirasi
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+
+                </table>
+            </div>
+
+            @if ($query->count() > 0)
+                <div class="p-4 bg-blue-50 text-blue-700 text-sm">
+                    📊 Total hasil filter: <strong>{{ $query->count() }}</strong>
+                </div>
+            @endif
+        </div>
+
+    </div>
+@endsection

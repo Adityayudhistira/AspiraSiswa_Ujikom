@@ -4,6 +4,8 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AuthManualController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InputAspirasiController;
+use App\Http\Controllers\SiswaController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,6 +25,17 @@ Route::middleware('auth:siswa')->group(function () {
 
 // ===== ADMIN ROUTES =====
 Route::prefix('admin')->name('admin.')->group(function () {
+
+    Route::get('/', function () {
+        if (Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
+        }
+        return redirect()->route('admin.login');
+    });
+
+    Route::get('/register', [AdminAuthController::class, 'register'])->name('register');
+    Route::post('/register', [AdminAuthController::class, 'registerProses'])->name('register.proses');
+
     Route::get('/login', [AdminAuthController::class, 'index'])->name('login');
     Route::post('/login', [AdminAuthController::class, 'loginProses'])->name('loginProses');
     Route::delete(
@@ -46,5 +59,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/aspirasi/{id}/edit-status', [InputAspirasiController::class, 'editStatus'])->name('aspirasi.editStatus');
         Route::put('/aspirasi/{id}/update-status', [InputAspirasiController::class, 'updateStatus'])->name('aspirasi.updateStatus');
         Route::resource('category', CategoryController::class);
+        Route::resource('siswa', SiswaController::class);
     });
 });
