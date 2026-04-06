@@ -6,137 +6,87 @@
     <title>Login Siswa</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        .container-fluid {
-            height: 100vh;
-        }
-
-        .left-panel {
-            background: #2f5fd0;
-            color: white;
-            padding: 80px 60px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .left-panel h2 {
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .left-panel p {
-            opacity: 0.9;
-        }
-
-        .right-panel {
-            background: #f8f9fa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .login-box {
-            width: 350px;
-        }
-
-        .login-box h4 {
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .form-control {
-            height: 45px;
-        }
-
-        .btn-login {
-            background: #2f5fd0;
-            border: none;
-            height: 45px;
-            font-weight: 500;
-        }
-
-        .btn-login:hover {
-            background: #1e4db7;
-        }
-
-        .small-link {
-            font-size: 14px;
-        }
-    </style>
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
+<body class="h-screen bg-gray-100">
 
-    <div class="container-fluid">
-        <div class="row h-100">
+    <div class="flex h-screen">
 
-            <!-- LEFT SIDE -->
-            <div class="col-md-6 left-panel">
-                <h2>Selamat Datang Kembali</h2>
-                <p>
-                    Masuk ke akun Anda untuk melanjutkan pengajuan
-                    atau melihat status laporan Anda.
+        <!-- LEFT SIDE -->
+        <div class="hidden md:flex w-1/2 bg-blue-600 text-white flex-col justify-center px-16">
+            <h2 class="text-3xl font-bold mb-4">
+                Selamat Datang Kembali 👋
+            </h2>
+
+            <p class="text-blue-100 leading-relaxed">
+                Masuk ke akun Anda untuk melanjutkan pengajuan
+                atau melihat status laporan Anda.
+            </p>
+
+            <div class="mt-10 text-sm text-blue-200">
+                <p class="italic">
+                    "Aspirasi membantu dalam menyelesaikan masalah
+                    di lingkungan kami. Terima kasih!"
+                </p>
+                <p class="mt-2 font-semibold">- Siswa</p>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="flex w-full md:w-1/2 items-center justify-center px-6">
+
+            <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg">
+
+                <h4 class="text-xl font-semibold text-gray-800">
+                    Masuk ke Akun Anda
+                </h4>
+
+                <p class="text-sm text-gray-500 mb-6">
+                    Silakan masukkan NIS dan password Anda
                 </p>
 
-                <div class="mt-5">
-                    <small>
-                        "Aspirasi membantu dalam menyelesaikan
-                        masalah di lingkungan kami. Terima kasih!"
-                    </small>
-                    <br>
-                    <strong>- Siswa</strong>
-                </div>
-            </div>
+                @if ($errors->any())
+                    <div class="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-lg mb-4">
+                        {{ $errors->first() }}
+                    </div>
+                @endif
 
-            <!-- RIGHT SIDE -->
-            <div class="col-md-6 right-panel">
-                <div class="login-box">
+                <form action="{{ route('loginProses') }}" method="POST" class="space-y-4">
+                    @csrf
 
-                    <h4>Masuk ke Akun Anda</h4>
-                    <p class="text-muted mb-4">
-                        Silakan masukkan NIS dan password Anda
-                    </p>
+                    <!-- NIS -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                            NIS
+                        </label>
+                        <input type="text" name="nis" placeholder="Masukkan NIS"
+                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none"
+                            required>
+                    </div>
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            {{ $errors->first() }}
-                        </div>
-                    @endif
+                    <!-- Password -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                            Password
+                        </label>
+                        <input type="password" name="password" placeholder="Masukkan Password"
+                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none"
+                            required>
+                    </div>
 
-                    <form action="{{ route('loginProses') }}" method="POST">
-                        @csrf
+                    <!-- BUTTON -->
+                    <button type="submit"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium shadow transition">
+                        Masuk
+                    </button>
+                </form>
 
-                        <div class="mb-3">
-                            <label class="form-label small">NIS</label>
-                            <input type="text" name="nis" class="form-control" placeholder="Masukkan NIS"
-                                required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label small">Password</label>
-                            <input type="password" name="password" class="form-control" placeholder="Masukkan Password"
-                                required>
-                        </div>
-                        <div class="d-grid mb-3">
-                            <button type="submit" class="btn btn-login text-white">
-                                Masuk
-                            </button>
-                        </div>
-                    </form>
-
-                </div>
             </div>
 
         </div>
+
     </div>
 
 </body>
