@@ -73,19 +73,25 @@
                                 <td class="px-6 py-4">
                                     <div class="flex gap-2">
 
+                                        <!-- EDIT -->
                                         <a href="{{ route('admin.siswa.edit', $siswa->nis) }}"
-                                            class="bg-yellow-500 text-white px-3 py-1 rounded-md text-xs hover:bg-yellow-600 transition">
-                                            ✏️ Edit
+                                            class="flex items-center gap-1 bg-yellow-50 text-yellow-600 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-yellow-100 transition">
+
+                                            <i data-lucide="edit" class="w-3.5 h-3.5"></i>
+                                            Edit
                                         </a>
 
+                                        <!-- DELETE -->
                                         <form action="{{ route('admin.siswa.destroy', $siswa->nis) }}" method="POST"
                                             onsubmit="return confirm('Yakin ingin hapus akun siswa ini?')">
                                             @csrf
                                             @method('DELETE')
 
                                             <button type="submit"
-                                                class="bg-red-600 text-white px-3 py-1 rounded-md text-xs hover:bg-red-700 transition">
-                                                🗑️ Hapus
+                                                class="flex items-center gap-1 bg-red-50 text-red-600 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-red-100 transition">
+
+                                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                                Hapus
                                             </button>
                                         </form>
 
