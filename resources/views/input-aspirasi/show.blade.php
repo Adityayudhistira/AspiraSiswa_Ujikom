@@ -14,7 +14,7 @@
     <nav class="bg-blue-600 text-white shadow">
         <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="{{ route('input-aspirasi.index') }}" class="text-lg font-semibold">
-                🧑‍🎓 Portal Siswa
+                Portal Siswa
             </a>
 
             <p class="text-sm">

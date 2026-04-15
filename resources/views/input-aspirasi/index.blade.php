@@ -13,7 +13,7 @@
 
     <nav class="bg-blue-600 text-white shadow">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-lg font-semibold">🧑‍🎓 Portal Siswa</h1>
+            <h1 class="text-lg font-semibold"> Portal Siswa</h1>
 
             <div class="flex items-center gap-4">
                 <p class="text-sm">
@@ -171,7 +171,7 @@
 
         <!-- INFO -->
         <div class="bg-blue-100 text-blue-700 px-4 py-3 rounded-lg text-sm">
-            <strong>ℹ️ Info:</strong> Siswa tidak dapat mengedit aspirasi setelah dikirim.
+            <strong> Info:</strong> Siswa tidak dapat mengedit aspirasi setelah dikirim.
             Jika ada kesalahan, hapus dan buat ulang.
         </div>
 

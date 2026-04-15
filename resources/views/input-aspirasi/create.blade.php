@@ -14,7 +14,7 @@
     <nav class="bg-blue-600 text-white shadow">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="{{ route('input-aspirasi.index') }}" class="text-lg font-semibold">
-                🧑‍🎓 Portal Siswa
+                Portal Siswa
             </a>
 
             <p class="text-sm">
@@ -105,7 +105,7 @@
                     </div>
 
                     <div class="bg-blue-100 text-blue-700 px-4 py-3 rounded-lg text-sm">
-                        <strong>📌 Catatan:</strong> NIS Anda
+                        <strong> Catatan:</strong> NIS Anda
                         (<span class="font-mono">{{ Auth::user()->nis }}</span>)
                         akan otomatis tercatat.
                     </div>
@@ -113,7 +113,7 @@
                     <div class="flex gap-3 pt-2">
                         <button type="submit"
                             class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium shadow transition">
-                            💾 Kirim Aspirasi
+                            Kirim Aspirasi
                         </button>
 
                         <a href="{{ route('input-aspirasi.index') }}"
