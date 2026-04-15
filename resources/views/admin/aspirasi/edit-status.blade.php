@@ -3,24 +3,20 @@
 @section('content')
     <div class="p-6">
 
-        <!-- BACK BUTTON -->
         <a href="{{ route('admin.aspirasi.index') }}"
             class="inline-flex items-center gap-2 bg-white text-slate-700 px-4 py-2 rounded-xl text-sm font-medium shadow hover:shadow-md hover:bg-gray-100 transition">
             ← Kembali ke Aspirasi
         </a>
 
-        <!-- CARD -->
         <div class="max-w-4xl mx-auto mt-6">
             <div class="bg-white shadow-xl rounded-2xl overflow-hidden border border-gray-100">
 
-                <!-- HEADER -->
                 <div class="bg-blue-500 text-white px-6 py-4">
                     <h2 class="text-lg font-semibold">✏️ Edit Status & Feedback Aspirasi</h2>
                 </div>
 
                 <div class="p-6 space-y-6">
 
-                    <!-- INFO -->
                     <div class="bg-blue-50 border border-blue-200 rounded-xl p-5">
                         <h3 class="font-semibold text-blue-800 mb-4">📌 Informasi Aspirasi</h3>
 
@@ -62,13 +58,11 @@
                         </div>
                     </div>
 
-                    <!-- FORM -->
                     <form action="{{ route('admin.aspirasi.updateStatus', $inputAspirasi->id_pelaporan) }}" method="POST"
                         class="space-y-6">
                         @csrf
                         @method('PUT')
 
-                        <!-- STATUS -->
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-2">
                                 Status <span class="text-red-500">*</span>
@@ -90,7 +84,6 @@
                             @enderror
                         </div>
 
-                        <!-- FEEDBACK -->
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-2">
                                 Feedback
@@ -108,7 +101,6 @@
                             </p>
                         </div>
 
-                        <!-- BUTTON -->
                         <div class="flex gap-3 pt-2">
 
                             <button type="submit"

@@ -6,13 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aspirasi Siswa</title>
 
-    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-slate-100">
 
-    <!-- NAVBAR -->
     <nav class="bg-blue-600 text-white shadow">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <h1 class="text-lg font-semibold">🧑‍🎓 Portal Siswa</h1>
@@ -33,10 +31,8 @@
         </div>
     </nav>
 
-    <!-- CONTENT -->
     <div class="max-w-7xl mx-auto px-6 mt-8 space-y-6">
 
-        <!-- HEADER -->
         <div class="flex justify-between items-center">
             <h2 class="text-2xl font-bold text-gray-800">
                 📋 Semua Aspirasi Siswa
@@ -48,14 +44,12 @@
             </a>
         </div>
 
-        <!-- SUCCESS -->
         @if (session('success'))
             <div class="bg-green-100 border border-green-300 text-green-700 px-4 py-3 rounded-lg">
                 {{ session('success') }}
             </div>
         @endif
 
-        <!-- TABLE -->
         <div class="bg-white rounded-xl shadow overflow-hidden">
 
             <div class="overflow-x-auto">
@@ -108,7 +102,6 @@
                                     {{ Str::limit($item->ket, 30) }}
                                 </td>
 
-                                <!-- STATUS -->
                                 <td class="px-4 py-3">
                                     @if ($item->aspirasi)
                                         @php
@@ -135,7 +128,6 @@
                                     {{ $item->created_at->format('d/m/Y') }}
                                 </td>
 
-                                <!-- AKSI -->
                                 <td class="px-4 py-3">
                                     <div class="flex gap-2">
 

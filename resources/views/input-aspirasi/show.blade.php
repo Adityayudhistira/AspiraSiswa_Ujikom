@@ -6,13 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Aspirasi</title>
 
-    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-slate-100">
 
-    <!-- NAVBAR -->
     <nav class="bg-blue-600 text-white shadow">
         <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="{{ route('input-aspirasi.index') }}" class="text-lg font-semibold">
@@ -25,22 +23,18 @@
         </div>
     </nav>
 
-    <!-- CONTENT -->
     <div class="max-w-3xl mx-auto mt-10 px-4">
 
         <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
 
-            <!-- HEADER -->
             <div class="bg-blue-600 px-6 py-4">
                 <h4 class="text-white font-semibold text-lg">
                     📄 Detail Aspirasi
                 </h4>
             </div>
 
-            <!-- BODY -->
             <div class="p-6 space-y-6">
 
-                <!-- DATA -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
 
                     <div>
@@ -79,7 +73,6 @@
 
                 </div>
 
-                <!-- KETERANGAN -->
                 <div>
                     <p class="text-gray-500 mb-1">Keterangan</p>
                     <div class="bg-gray-100 p-4 rounded-lg text-sm">
@@ -87,7 +80,6 @@
                     </div>
                 </div>
 
-                <!-- STATUS -->
                 <div>
                     <p class="text-gray-500 mb-2">Status</p>
 
@@ -112,7 +104,6 @@
                     @endif
                 </div>
 
-                <!-- FEEDBACK -->
                 <div>
                     <p class="text-gray-500 mb-2">Feedback Admin</p>
 
@@ -127,7 +118,6 @@
                     @endif
                 </div>
 
-                <!-- BUTTON -->
                 <div class="flex gap-3 pt-4">
 
                     <a href="{{ route('input-aspirasi.index') }}"

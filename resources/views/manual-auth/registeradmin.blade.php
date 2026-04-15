@@ -13,7 +13,6 @@
 
     <div class="grid md:grid-cols-2 h-full">
 
-        <!-- LEFT PANEL -->
         <div class="bg-blue-600 text-white flex flex-col justify-center px-16 py-10">
             <h2 class="text-3xl font-bold mb-4">
                 Daftar Admin Baru
@@ -32,7 +31,6 @@
             </div>
         </div>
 
-        <!-- RIGHT PANEL -->
         <div class="bg-slate-100 flex items-center justify-center px-6">
 
             <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl">
@@ -54,7 +52,6 @@
                 <form action="{{ route('admin.register.proses') }}" method="POST" class="space-y-4">
                     @csrf
 
-                    <!-- Username -->
                     <div>
                         <label class="text-sm font-medium text-gray-700">Username</label>
                         <input type="text" name="username"
@@ -62,7 +59,6 @@
                             placeholder="Masukkan username" required>
                     </div>
 
-                    <!-- Password -->
                     <div>
                         <label class="text-sm font-medium text-gray-700">Password</label>
                         <input type="password" name="password"

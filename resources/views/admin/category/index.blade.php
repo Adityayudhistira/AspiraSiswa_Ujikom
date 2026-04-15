@@ -3,7 +3,6 @@
 @section('content')
     <div class="space-y-6">
 
-        <!-- HEADER -->
         <div class="flex justify-between items-center">
             <h2 class="text-2xl font-bold">
                 📂 Kelola Kategori Aspirasi
@@ -16,7 +15,6 @@
         </div>
 
 
-        <!-- SUCCESS ALERT -->
         @if (session('success'))
             <div class="bg-green-100 border border-blue-300 text-blue-700 px-4 py-3 rounded-lg">
                 {{ session('success') }}
@@ -24,7 +22,6 @@
         @endif
 
 
-        <!-- TABLE -->
         <div class="bg-white rounded-xl shadow overflow-hidden">
 
             <div class="overflow-x-auto">
@@ -65,7 +62,6 @@
                                 <td class="px-6 py-4">
                                     <div class="flex gap-2">
 
-                                        <!-- EDIT -->
                                         <a href="{{ route('admin.category.edit', $category->id_category) }}"
                                             class="flex items-center gap-1 bg-yellow-50 text-yellow-600 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-yellow-100 transition">
 
@@ -73,7 +69,6 @@
                                             Edit
                                         </a>
 
-                                        <!-- DELETE -->
                                         <form action="{{ route('admin.category.destroy', $category->id_category) }}"
                                             method="POST" onsubmit="return confirm('Yakin ingin hapus kategori ini?')">
                                             @csrf

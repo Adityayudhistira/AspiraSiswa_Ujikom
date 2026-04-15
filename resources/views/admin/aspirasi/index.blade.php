@@ -3,7 +3,6 @@
 @section('content')
     <div class="p-6">
 
-        <!-- TITLE -->
         <div>
             <h2 class="text-2xl font-semibold text-gray-800">
                 Kelola Semua Aspirasi
@@ -13,14 +12,12 @@
             </p>
         </div>
 
-        <!-- SUCCESS -->
         @if (session('success'))
             <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl">
                 {{ session('success') }}
             </div>
         @endif
 
-        <!-- STATISTIK -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
 
             <div class="bg-white p-5 rounded-2xl border shadow-sm">
@@ -53,7 +50,6 @@
 
         </div>
 
-        <!-- FILTER -->
         <div class="bg-white shadow rounded-2xl mb-6 mt-6">
             <div class="bg-blue-500 text-white px-6 py-3 rounded-t-2xl font-semibold">
                 🔍 Filter Aspirasi
@@ -111,7 +107,6 @@
 
                 <div class="flex items-end gap-2">
 
-                    <!-- FILTER -->
                     <button type="submit"
                         class="flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-lg text-sm font-medium border border-blue-200 hover:bg-blue-100 transition">
 
@@ -119,7 +114,6 @@
                         Filter
                     </button>
 
-                    <!-- RESET -->
                     <a href="{{ route('admin.aspirasi.index') }}"
                         class="flex items-center gap-2 bg-gray-50 text-gray-600 px-4 py-2 rounded-lg text-sm font-medium border border-gray-200 hover:bg-gray-100 transition">
 
@@ -132,7 +126,6 @@
             </form>
         </div>
 
-        <!-- TABLE -->
         <div class="bg-white shadow rounded-2xl overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left">
@@ -194,7 +187,6 @@
                                 <td class="px-4 py-3">
                                     <div class="flex items-center gap-2">
 
-                                        <!-- EDIT -->
                                         <a href="{{ route('admin.aspirasi.editStatus', $item->id_pelaporan) }}"
                                             class="flex items-center gap-1 bg-yellow-50 text-yellow-600 px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-yellow-100 transition">
 
@@ -202,7 +194,6 @@
                                             Edit
                                         </a>
 
-                                        <!-- DELETE -->
                                         <form action="{{ route('admin.aspirasi.destroy', $item->id_pelaporan) }}"
                                             method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
                                             @csrf

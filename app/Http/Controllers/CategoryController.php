@@ -33,7 +33,6 @@ class CategoryController extends Controller
             'ket_category' => 'required|string|max:30'
         ]);
 
-        // ambil input user->simpan data
         Category::create([
             'ket_category' => $request->ket_category
         ]);

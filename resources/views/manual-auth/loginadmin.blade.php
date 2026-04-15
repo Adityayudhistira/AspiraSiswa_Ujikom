@@ -6,17 +6,14 @@
     <title>Login Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 flex items-center justify-center">
+<body class="min-h-screen bg-linear-to-br from-blue-600 via-blue-700 to-blue-900 flex items-center justify-center">
 
-    <!-- CARD -->
     <div
         class="w-full max-w-5xl bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden grid md:grid-cols-2">
 
-        <!-- LEFT -->
         <div class="hidden md:flex flex-col justify-center p-10 text-white">
             <h2 class="text-3xl font-bold mb-4">
                 Admin Dashboard
@@ -35,7 +32,6 @@
             </div>
         </div>
 
-        <!-- RIGHT -->
         <div class="bg-white p-8 md:p-10">
 
             <h3 class="text-2xl font-bold text-gray-800 mb-2">
@@ -55,7 +51,6 @@
             <form action="{{ route('admin.loginProses') }}" method="POST" class="space-y-5">
                 @csrf
 
-                <!-- Username -->
                 <div>
                     <label class="text-sm font-medium text-gray-600">Username</label>
                     <input type="text" name="username"
@@ -63,7 +58,6 @@
                         placeholder="Masukkan Username" required autofocus>
                 </div>
 
-                <!-- Password -->
                 <div>
                     <label class="text-sm font-medium text-gray-600">Password</label>
                     <input type="password" name="password"
@@ -71,13 +65,11 @@
                         placeholder="Masukkan Password" required>
                 </div>
 
-                <!-- BUTTON -->
                 <button type="submit"
                     class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition">
                     Masuk ke Dashboard
                 </button>
 
-                <!-- LINKS -->
                 <div class="text-center space-y-2 mt-4">
 
                     <p class="text-sm text-gray-600">

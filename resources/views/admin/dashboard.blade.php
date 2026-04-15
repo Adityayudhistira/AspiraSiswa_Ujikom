@@ -3,7 +3,6 @@
 @section('content')
     <div class="space-y-6">
 
-        {{-- SUCCESS ALERT --}}
         @if (session('success'))
             <div
                 class="bg-green-100 border border-green-300 text-green-700 px-4 py-3 rounded-lg flex justify-between items-center">
@@ -14,10 +13,8 @@
         @endif
 
 
-        {{-- STATISTIK CARDS --}}
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-            <!-- TOTAL -->
             <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
                 <div class="flex justify-between items-center">
                     <div>
@@ -38,7 +35,6 @@
             </div>
 
 
-            <!-- PROSES -->
             <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
                 <div class="flex justify-between items-center">
                     <div>
@@ -59,7 +55,6 @@
             </div>
 
 
-            <!-- SELESAI -->
             <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
                 <div class="flex justify-between items-center">
                     <div>
@@ -81,9 +76,6 @@
 
         </div>
 
-
-
-        {{-- PENGADUAN TERBARU --}}
         <div class="bg-white rounded-xl shadow p-6">
 
             <div class="flex justify-between items-center mb-6">

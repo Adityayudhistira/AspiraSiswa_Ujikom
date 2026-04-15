@@ -6,13 +6,11 @@
 
         <div class="max-w-3xl mx-auto space-y-6">
 
-            <!-- Back Button -->
             <a href="{{ route('admin.category.index') }}"
                 class="inline-flex items-center gap-2 bg-white text-slate-700 px-4 py-2 rounded-xl text-sm font-medium shadow hover:shadow-md hover:bg-gray-100 transition">
                 ← Kembali ke Kategori
             </a>
 
-            <!-- Card Edit -->
             <div class="bg-white shadow-xl rounded-3xl overflow-hidden">
 
                 <div class="bg-blue-500 px-8 py-5">

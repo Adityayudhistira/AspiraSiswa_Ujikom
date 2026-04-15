@@ -13,7 +13,6 @@ Route::get('/', function () {
 });
 
 
-// route login siswa
 Route::get('/login', [AuthManualController::class, 'index'])->name('login');
 Route::post('/login', [AuthManualController::class, 'loginProses'])->name('loginProses');
 
@@ -23,7 +22,6 @@ Route::middleware('auth:siswa')->group(function () {
         ->except(['edit', 'update']);
 });
 
-// ===== ADMIN ROUTES =====
 Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/', function () {

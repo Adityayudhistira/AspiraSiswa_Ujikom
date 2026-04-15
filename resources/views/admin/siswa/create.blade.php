@@ -6,23 +6,19 @@
 
         <div class="max-w-3xl mx-auto space-y-6">
 
-            <!-- Back Button -->
             <a href="{{ route('admin.siswa.index') }}"
                 class="inline-flex items-center gap-2 bg-white text-slate-700 px-4 py-2 rounded-xl text-sm font-medium shadow hover:bg-gray-100 hover:shadow-md transition">
                 ← Kembali ke Siswa
             </a>
 
-            <!-- Card -->
             <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
 
-                <!-- Header -->
                 <div class="bg-blue-500 px-8 py-5">
                     <h4 class="text-xl font-semibold text-white">
                         ➕ Tambah Akun Siswa Baru
                     </h4>
                 </div>
 
-                <!-- Body -->
                 <div class="p-8 space-y-6">
 
                     @if ($errors->any())
@@ -39,7 +35,6 @@
                     <form action="{{ route('admin.siswa.store') }}" method="POST" class="space-y-6">
                         @csrf
 
-                        <!-- NIS -->
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-2">
                                 NIS <span class="text-red-500">*</span>
@@ -54,7 +49,6 @@
                             @enderror
                         </div>
 
-                        <!-- Nama -->
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-2">
                                 Nama <span class="text-red-500">*</span>
@@ -69,7 +63,6 @@
                             @enderror
                         </div>
 
-                        <!-- Kelas -->
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-2">
                                 Kelas <span class="text-red-500">*</span>
@@ -84,7 +77,6 @@
                             @enderror
                         </div>
 
-                        <!-- Password -->
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-2">
                                 Password <span class="text-red-500">*</span>
@@ -98,7 +90,6 @@
                             @enderror
                         </div>
 
-                        <!-- Buttons -->
                         <div class="flex gap-3 pt-4">
                             <button type="submit"
                                 class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold shadow hover:shadow-lg transition">

@@ -37,7 +37,6 @@ class SiswaController extends Controller
             'password' => 'required|min:6'
         ]);
 
-        // simpan ke database
         Siswa::create([
             'nis' => $request->nis,
             'nama' => $request->nama,
@@ -45,7 +44,6 @@ class SiswaController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        // redirect
         return redirect()->route('admin.siswa.index')
             ->with('success', 'Akun siswa berhasil ditambahkan');
     }
@@ -63,7 +61,6 @@ class SiswaController extends Controller
      */
     public function update(Request $request, Siswa $siswa)
     {
-        // validasi
         $request->validate([
             'nis' => 'required|max:20|unique:siswa,nis,' . $siswa->nis . ',nis',
             'nama' => 'required|max:70',
@@ -71,14 +68,12 @@ class SiswaController extends Controller
             'password' => 'nullable|min:6'
         ]);
 
-        // data yang diupdate
         $data = [
             'nis' => $request->nis,
             'nama' => $request->nama,
             'kelas' => $request->kelas,
         ];
 
-        // kalau password diisi, baru update
         if ($request->filled('password')) {
             $data['password'] = Hash::make($request->password);
         }

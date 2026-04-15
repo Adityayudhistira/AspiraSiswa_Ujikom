@@ -12,7 +12,7 @@ class Siswa extends Authenticatable
 
     protected $table = 'siswa';
     protected $primaryKey = 'nis';
-    public $incrementing = false; // ngasi tau laravel PK nya bukan autoincrement
+    public $incrementing = false;
     protected $keyType = 'string';
 
     protected $fillable = [

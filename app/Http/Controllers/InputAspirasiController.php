@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class InputAspirasiController extends Controller
 {
-    // TAMPILKAN SEMUA DATA
     public function index(Request $request)
     {
 
@@ -58,44 +57,37 @@ class InputAspirasiController extends Controller
             $categories = \App\Models\Category::all();
             $siswas = \App\Models\Siswa::all();
 
-            // Admin: tampilkan view admin
             return view('admin.aspirasi.index', compact('query', 'categories', 'siswas', 'stats'));
         }
 
-        // buat siswa
         $query = $data->get();
         return view('input-aspirasi.index', compact('query'));
     }
 
-    // FORM TAMBAH DATA
     public function create()
     {
         $categories = Category::all();
         return view('input-aspirasi.create', compact('categories'));
     }
 
-    // SIMPAN DATA
     public function store(Request $request)
     {
-        // jadi intinya fungsi exist itu ngevalidasi bahwa nilai nis yg digunakan di tabel FK ada di tbel PK
         $request->validate([
             'id_category' => 'required|exists:category,id_category',
             'lokasi' => 'required|string|max:50',
             'ket' => 'required|string|max:50',
         ]);
 
-        // Buat aspirasi baru di tabel input_aspirasi
         $inputAspirasi = InputAspirasi::create([
-            'nis' => Auth::guard('siswa')->user()->nis, // NIS otomatis dari yang login
+            'nis' => Auth::guard('siswa')->user()->nis,
             'id_category' => $request->id_category,
             'lokasi' => $request->lokasi,
             'ket' => $request->ket,
         ]);
 
-        // biar di tabel aspirasi dgn status default
         $inputAspirasi->aspirasi()->create([
             'id_pelaporan' => $inputAspirasi->id_pelaporan,
-            'id_category' => $request->id_category, // WAJIB ADA
+            'id_category' => $request->id_category,
             'status' => 'Menunggu',
             'feedback' => null,
         ]);
@@ -104,27 +96,22 @@ class InputAspirasiController extends Controller
             ->with('success', 'Aspirasi berhasil dikirim dan menunggu review admin!');
     }
 
-    // DETAIL DATA
     public function show(InputAspirasi $inputAspirasi)
     {
         $inputAspirasi->load(['siswa', 'category', 'aspirasi']);
 
-        // yg didalem compact didapet dari ($inputAspirasi)
         return view('input-aspirasi.show', compact('inputAspirasi'));
     }
 
 
-    // FORM EDIT
     public function edit(InputAspirasi $inputAspirasi)
     {
         if (Auth::guard('admin')->check()) {
-            // Admin bisa edit semua (tapi pakai editStatus)
             return redirect()->route('admin.aspirasi.editStatus', $inputAspirasi->id_pelaporan);
         }
     }
 
 
-    // UPDATE DATA
     public function update(Request $request, InputAspirasi $inputAspirasi)
     {
 
@@ -132,10 +119,8 @@ class InputAspirasiController extends Controller
     }
 
 
-    // HAPUS DATA
     public function destroy(InputAspirasi $inputAspirasi)
     {
-        // Jika siswa
         if (Auth::guard('siswa')->check()) {
 
             if ($inputAspirasi->nis !== Auth::guard('siswa')->user()->nis) {
@@ -148,7 +133,6 @@ class InputAspirasiController extends Controller
                 ->with('success', 'Data berhasil dihapus');
         }
 
-        // Jika admin
         if (Auth::guard('admin')->check()) {
 
             $inputAspirasi->delete();
@@ -179,7 +163,6 @@ class InputAspirasiController extends Controller
 
         $inputAspirasi = InputAspirasi::findOrFail($id);
 
-        // Update atau buat record di tabel aspirasi
         $inputAspirasi->aspirasi()->updateOrCreate(
             ['id_pelaporan' => $inputAspirasi->id_pelaporan],
             [

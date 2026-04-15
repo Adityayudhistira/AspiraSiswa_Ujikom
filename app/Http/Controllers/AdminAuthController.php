@@ -37,13 +37,11 @@ class AdminAuthController extends Controller
 
     public function loginProses(Request $request)
     {
-        // Validasi sesuai field tabel admin
         $admin = $request->validate([
             'username' => 'required|string|max:50',
             'password' => 'required|string|min:6',
         ]);
 
-        // Login dengan guard admin
         if (Auth::guard('admin')->attempt($admin)) {
             $request->session()->regenerate();
             return redirect()->route('admin.dashboard')
@@ -51,7 +49,7 @@ class AdminAuthController extends Controller
         }
 
         return back()->withErrors([
-            'login' => 'Username atau Password salah!', // 'login' bikinan sendiri
+            'login' => 'Username atau Password salah!',
         ]);
     }
 
