@@ -16,19 +16,19 @@
 
         <div class="hidden md:flex flex-col justify-center p-10 text-white">
             <h2 class="text-3xl font-bold mb-4">
-                Selamat Datang
+                Portal Aspirasi Siswa
             </h2>
 
             <p class="text-blue-100 leading-relaxed mb-6">
-                Masuk untuk melihat dan mengirim aspirasi kamu.
-                Suara kamu penting untuk perubahan sekolah 🚀
+                Tempat bagi siswa untuk menyampaikan ide, keluhan, dan masukan
+                demi menciptakan lingkungan sekolah yang lebih baik, nyaman, dan berkembang bersama.
             </p>
 
             <div class="bg-white/10 p-4 rounded-xl text-sm">
                 <p class="italic">
-                    "Satu aspirasi bisa membawa perubahan besar."
+                    "Suaramu berarti. Sampaikan, dan jadilah bagian dari perubahan."
                 </p>
-                <p class="mt-2 font-semibold">- Portal Siswa</p>
+                <p class="mt-2 font-semibold">- Sistem Aspirasi Sekolah</p>
             </div>
         </div>
 

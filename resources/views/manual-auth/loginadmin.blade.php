@@ -16,19 +16,19 @@
 
         <div class="hidden md:flex flex-col justify-center p-10 text-white">
             <h2 class="text-3xl font-bold mb-4">
-                Admin Dashboard
+                Sistem Aspirasi Sekolah
             </h2>
 
             <p class="text-blue-100 leading-relaxed mb-6">
-                Kelola aspirasi siswa, kategori, dan sistem
-                dengan mudah dalam satu dashboard terintegrasi.
+                Platform digital untuk menampung, mengelola, dan menindaklanjuti aspirasi siswa
+                secara cepat, transparan, dan terorganisir dalam satu dashboard terintegrasi.
             </p>
 
             <div class="bg-white/10 p-4 rounded-xl text-sm">
                 <p class="italic">
-                    "Kontrol sistem dengan bijak dan transparan."
+                    "Setiap aspirasi adalah langkah menuju lingkungan sekolah yang lebih baik."
                 </p>
-                <p class="mt-2 font-semibold">- Administrator</p>
+                <p class="mt-2 font-semibold">- Admin System</p>
             </div>
         </div>
 

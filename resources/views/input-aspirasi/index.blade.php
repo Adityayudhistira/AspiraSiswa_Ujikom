@@ -136,20 +136,6 @@
                                             Detail
                                         </a>
 
-                                        @if ($item->nis === Auth::user()->nis)
-                                            <form action="{{ route('input-aspirasi.destroy', $item->id_pelaporan) }}"
-                                                method="POST"
-                                                onsubmit="return confirm('Yakin ingin hapus aspirasi ini?')">
-                                                @csrf
-                                                @method('DELETE')
-
-                                                <button type="submit"
-                                                    class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs transition">
-                                                    Hapus
-                                                </button>
-                                            </form>
-                                        @endif
-
                                     </div>
                                 </td>
 
@@ -169,10 +155,17 @@
 
         </div>
 
-        <!-- INFO -->
-        <div class="bg-blue-100 text-blue-700 px-4 py-3 rounded-lg text-sm">
-            <strong> Info:</strong> Siswa tidak dapat mengedit aspirasi setelah dikirim.
-            Jika ada kesalahan, hapus dan buat ulang.
+        <div
+            class="bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 rounded-lg text-sm flex items-start gap-2">
+
+            <span>ℹ️</span>
+
+            <div>
+                <strong>Informasi:</strong>
+                Setiap aspirasi yang sudah dikirim tidak dapat diubah.
+                Silakan pastikan data yang dimasukkan sudah benar sebelum dikirim.
+            </div>
+
         </div>
 
     </div>

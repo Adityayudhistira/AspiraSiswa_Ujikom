@@ -121,17 +121,6 @@ class InputAspirasiController extends Controller
 
     public function destroy(InputAspirasi $inputAspirasi)
     {
-        if (Auth::guard('siswa')->check()) {
-
-            if ($inputAspirasi->nis !== Auth::guard('siswa')->user()->nis) {
-                abort(403, 'Anda tidak memiliki akses untuk hapus aspirasi ini.');
-            }
-
-            $inputAspirasi->delete();
-
-            return redirect()->route('input-aspirasi.index')
-                ->with('success', 'Data berhasil dihapus');
-        }
 
         if (Auth::guard('admin')->check()) {
 

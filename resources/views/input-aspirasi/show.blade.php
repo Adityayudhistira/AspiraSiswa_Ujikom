@@ -125,19 +125,6 @@
                         ← Kembali
                     </a>
 
-                    @if ($inputAspirasi->nis === Auth::user()->nis)
-                        <form action="{{ route('input-aspirasi.destroy', $inputAspirasi->id_pelaporan) }}"
-                            method="POST" onsubmit="return confirm('Yakin ingin hapus aspirasi ini?')">
-                            @csrf
-                            @method('DELETE')
-
-                            <button type="submit"
-                                class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm transition">
-                                🗑️ Hapus
-                            </button>
-                        </form>
-                    @endif
-
                 </div>
 
             </div>
