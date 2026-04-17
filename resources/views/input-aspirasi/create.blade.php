@@ -46,7 +46,8 @@
                     </div>
                 @endif
 
-                <form action="{{ route('input-aspirasi.store') }}" method="POST" class="space-y-5">
+                <form action="{{ route('input-aspirasi.store') }}" method="POST" enctype="multipart/form-data"
+                    class="space-y-5">
                     @csrf
 
                     <div>
@@ -91,7 +92,7 @@
                             Keterangan <span class="text-red-500">*</span>
                         </label>
 
-                        <textarea name="ket" rows="4" maxlength="50" placeholder="Jelaskan aspirasi Anda..."
+                        <textarea name="ket" rows="4" maxlength="255" placeholder="Jelaskan aspirasi Anda..."
                             class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none @error('ket') border-red-500 @enderror"
                             required>{{ old('ket') }}</textarea>
 
@@ -100,7 +101,24 @@
                         @enderror
 
                         <p class="text-xs text-gray-400 mt-1">
-                            Maksimal 50 karakter
+                            Maksimal 255 karakter
+                        </p>
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-gray-700 mb-2">
+                            Upload Gambar (Opsional)
+                        </label>
+
+                        <input type="file" name="gambar" accept="image/*"
+                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none @error('gambar') border-red-500 @enderror">
+
+                        @error('gambar')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+
+                        <p class="text-xs text-gray-400 mt-1">
+                            Format: JPG, PNG (Max 2MB)
                         </p>
                     </div>
 

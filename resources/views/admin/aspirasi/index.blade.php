@@ -140,6 +140,7 @@
                             <th class="px-4 py-3">Kategori</th>
                             <th class="px-4 py-3">Lokasi</th>
                             <th class="px-4 py-3">Keterangan</th>
+                            <th class="px-4 py-3">Gambar</th>
                             <th class="px-4 py-3">Status</th>
                             <th class="px-4 py-3">Aksi</th>
                         </tr>
@@ -162,6 +163,15 @@
 
                                 <td class="px-4 py-3">{{ Str::limit($item->lokasi, 15) }}</td>
                                 <td class="px-4 py-3">{{ Str::limit($item->ket, 30) }}</td>
+                                <td class="px-4 py-3">
+                                    @if ($item->gambar)
+                                        <img src="{{ $item->gambar_url }}"
+                                            class="w-14 h-14 object-cover rounded-lg border cursor-pointer hover:scale-105 transition"
+                                            onclick="openModal('{{ $item->gambar_url }}')">
+                                    @else
+                                        <span class="text-xs text-gray-400">-</span>
+                                    @endif
+                                </td>
 
                                 <td class="px-4 py-3">
                                     @if ($item->aspirasi)
@@ -212,7 +222,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="10" class="text-center py-6 text-gray-500">
+                                <td colspan="11" class="text-center py-6 text-gray-500">
                                     Tidak ada data aspirasi
                                 </td>
                             </tr>

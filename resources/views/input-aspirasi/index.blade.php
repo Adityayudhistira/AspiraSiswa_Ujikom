@@ -63,6 +63,7 @@
                             <th class="px-4 py-3">Kategori</th>
                             <th class="px-4 py-3">Lokasi</th>
                             <th class="px-4 py-3">Keterangan</th>
+                            <th class="px-4 py-3">Gambar</th>
                             <th class="px-4 py-3">Status</th>
                             <th class="px-4 py-3">Tanggal</th>
                             <th class="px-4 py-3">Aksi</th>
@@ -100,6 +101,16 @@
 
                                 <td class="px-4 py-3">
                                     {{ Str::limit($item->ket, 30) }}
+                                </td>
+
+                                <td class="px-4 py-3">
+                                    @if ($item->gambar)
+                                        <img src="{{ $item->gambar_url }}"
+                                            class="w-16 h-16 object-cover rounded-lg border cursor-pointer hover:scale-105 transition"
+                                            onclick="openModal('{{ $item->gambar_url }}')">
+                                    @else
+                                        <span class="text-xs text-gray-400">Tidak ada</span>
+                                    @endif
                                 </td>
 
                                 <td class="px-4 py-3">
@@ -143,7 +154,7 @@
 
                         @empty
                             <tr>
-                                <td colspan="9" class="text-center py-6 text-gray-500">
+                                <td colspan="10" class="text-center py-6 text-gray-500">
                                     Belum ada aspirasi
                                 </td>
                             </tr>

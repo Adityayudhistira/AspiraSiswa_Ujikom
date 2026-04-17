@@ -18,7 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('id_category');
 
             $table->string('lokasi', 50);
-            $table->string('ket', 50);
+            $table->text('ket');
+
+            $table->string('gambar')->nullable(); // ✅ TAMBAHAN
 
             $table->timestamps();
 

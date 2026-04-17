@@ -55,6 +55,20 @@
                                     {{ $inputAspirasi->ket }}
                                 </p>
                             </div>
+
+                            <div class="md:col-span-2">
+                                <p class="text-gray-500 mb-2">Gambar</p>
+
+                                @if ($inputAspirasi->gambar)
+                                    <img src="{{ $inputAspirasi->gambar_url }}"
+                                        class="w-48 rounded-lg shadow border cursor-pointer hover:scale-105 transition"
+                                        onclick="openModal('{{ $inputAspirasi->gambar_url }}')">
+                                @else
+                                    <p class="text-gray-400 text-sm italic">
+                                        Tidak ada gambar
+                                    </p>
+                                @endif
+                            </div>
                         </div>
                     </div>
 

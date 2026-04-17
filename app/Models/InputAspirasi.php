@@ -17,6 +17,7 @@ class InputAspirasi extends Model
         'id_category',
         'lokasi',
         'ket',
+        'gambar',
     ];
 
     public function siswa()
@@ -33,5 +34,12 @@ class InputAspirasi extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'id_category', 'id_category');
+    }
+
+    public function getGambarUrlAttribute()
+    {
+        return $this->gambar
+            ? asset('storage/' . $this->gambar)
+            : null;
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\InputAspirasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class InputAspirasiController extends Controller
 {
@@ -75,14 +76,22 @@ class InputAspirasiController extends Controller
         $request->validate([
             'id_category' => 'required|exists:category,id_category',
             'lokasi' => 'required|string|max:50',
-            'ket' => 'required|string|max:50',
+            'ket' => 'required|string|max:255',
+            'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
+
+        $pathGambar = null;
+
+        if ($request->hasFile('gambar')) {
+            $pathGambar = $request->file('gambar')->store('aspirasi', 'public');
+        }
 
         $inputAspirasi = InputAspirasi::create([
             'nis' => Auth::guard('siswa')->user()->nis,
             'id_category' => $request->id_category,
             'lokasi' => $request->lokasi,
             'ket' => $request->ket,
+            'gambar' => $pathGambar,
         ]);
 
         $inputAspirasi->aspirasi()->create([
@@ -93,7 +102,7 @@ class InputAspirasiController extends Controller
         ]);
 
         return redirect()->route('input-aspirasi.index')
-            ->with('success', 'Aspirasi berhasil dikirim dan menunggu review admin!');
+            ->with('success', 'Aspirasi berhasil dikirim!');
     }
 
     public function show(InputAspirasi $inputAspirasi)
@@ -123,6 +132,10 @@ class InputAspirasiController extends Controller
     {
 
         if (Auth::guard('admin')->check()) {
+
+            if ($inputAspirasi->gambar) {
+                Storage::disk('public')->delete($inputAspirasi->gambar);
+            }
 
             $inputAspirasi->delete();
 
