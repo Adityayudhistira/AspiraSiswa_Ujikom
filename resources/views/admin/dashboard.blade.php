@@ -1,6 +1,7 @@
 @extends('admin.layout.sidebar')
 
 @section('content')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <div class="space-y-6">
 
         @if (session('success'))
@@ -12,6 +13,14 @@
             </div>
         @endif
 
+
+        <div class="bg-white p-6 rounded-xl shadow">
+            <h3 class="text-lg font-semibold mb-4">📊 Statistik Aspirasi</h3>
+
+            <div class="w-64 mx-auto">
+                <canvas id="chartAspirasi"></canvas>
+            </div>
+        </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
@@ -150,4 +159,51 @@
         </div>
 
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            const ctx = document.getElementById('chartAspirasi');
+
+            const dataValues = [
+                {{ $pengaduanMenunggu }},
+                {{ $pengaduanProses }},
+                {{ $pengaduanSelesai }}
+            ];
+
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Menunggu', 'Proses', 'Selesai'],
+                    datasets: [{
+                        data: dataValues,
+                        backgroundColor: [
+                            '#facc15', // kuning
+                            '#3b82f6', // biru
+                            '#22c55e' // hijau
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let total = dataValues.reduce((a, b) => a + b, 0);
+                                    let value = context.raw;
+                                    let percentage = total ? ((value / total) * 100).toFixed(1) : 0;
+                                    return `${context.label}: ${value} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+        });
+    </script>
 @endsection

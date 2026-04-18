@@ -45,12 +45,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
         Route::get('/dashboard', function () {
             $totalPengaduan = \App\Models\InputAspirasi::count();
+            $pengaduanMenunggu = \App\Models\Aspirasi::where('status', 'Menunggu')->count();
             $pengaduanProses = \App\Models\Aspirasi::where('status', 'Proses')->count();
             $pengaduanSelesai = \App\Models\Aspirasi::where('status', 'Selesai')->count();
             $pengaduanTerbaru = \App\Models\InputAspirasi::with(['siswa', 'category', 'aspirasi'])
                 ->orderBy('created_at', 'desc')
                 ->get();
-            return view('admin.dashboard', compact('totalPengaduan', 'pengaduanProses', 'pengaduanSelesai', 'pengaduanTerbaru'));
+            return view('admin.dashboard', compact('totalPengaduan', 'pengaduanMenunggu', 'pengaduanProses', 'pengaduanSelesai', 'pengaduanTerbaru'));
         })->name('dashboard');
 
         Route::get('/aspirasi', [InputAspirasiController::class, 'index'])->name('aspirasi.index');
