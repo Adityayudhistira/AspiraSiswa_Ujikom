@@ -59,5 +59,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/aspirasi/{id}/update-status', [InputAspirasiController::class, 'updateStatus'])->name('aspirasi.updateStatus');
         Route::resource('category', CategoryController::class);
         Route::resource('siswa', SiswaController::class);
+        Route::post('/siswa/import', [SiswaController::class, 'import'])->name('siswa.import');
     });
 });

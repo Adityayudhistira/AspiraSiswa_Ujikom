@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\SiswaImport;
 
 class SiswaController extends Controller
 {
@@ -93,5 +95,16 @@ class SiswaController extends Controller
 
         return redirect()->route('admin.siswa.index')
             ->with('success', 'Akun siswa berhasil dihapus');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls'
+        ]);
+
+        Excel::import(new SiswaImport, $request->file('file'));
+
+        return redirect()->back()->with('success', 'Data siswa berhasil diimport!');
     }
 }

@@ -3,15 +3,33 @@
 @section('content')
     <div class="space-y-6">
 
-        <div class="flex justify-between items-center">
+        <div class="flex justify-between items-center flex-wrap gap-3">
+
             <h2 class="text-2xl font-bold">
                 👨‍🎓 Kelola Data Siswa
             </h2>
 
-            <a href="{{ route('admin.siswa.create') }}"
-                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                ➕ Tambah Siswa
-            </a>
+            <div class="flex gap-2 items-center">
+
+                <!-- FORM IMPORT -->
+                <form action="{{ route('admin.siswa.import') }}" method="POST" enctype="multipart/form-data"
+                    class="flex gap-2">
+                    @csrf
+                    <input type="file" name="file" required class="text-sm border rounded-lg px-2 py-1">
+
+                    <button type="submit"
+                        class="bg-green-500 text-white px-3 py-2 rounded-lg text-sm hover:bg-green-600 transition">
+                        📥 Import
+                    </button>
+                </form>
+
+                <!-- TOMBOL TAMBAH -->
+                <a href="{{ route('admin.siswa.create') }}"
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                    ➕ Tambah Siswa
+                </a>
+
+            </div>
         </div>
 
         @if (session('success'))
